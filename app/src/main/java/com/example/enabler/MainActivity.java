@@ -89,20 +89,35 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void setButton(Integer state) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                btn.setVisibility(View.VISIBLE);
+                if (state == 1) {
+                    btn.setBackground(getDrawable(R.drawable.onwifi));
+                } else {
+                    btn.setBackground(getDrawable(R.drawable.offwifi));
+                }
+            }
+        });
+    }
+    
+    
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @JavascriptInterface
     public void onData(String value) {
-        btn.setVisibility(View.VISIBLE);
         if (value.equals("on")) {
             onOff = 1; // wifi is on
             Log.d("DEBUG", String.valueOf(onOff));
-            btn.setBackground(getDrawable(R.drawable.onwifi));
+            setButton(onOff);
         } else {
             onOff = 0; // wifi is off
             Log.d("DEBUG", String.valueOf(onOff));
-            btn.setBackground(getDrawable(R.drawable.offwifi));
+            setButton(onOff);
         }
     }
+    
     @SuppressLint("SetJavaScriptEnabled")
     private void givePermissionToWebView(WebView webView) {
         WebSettings webSettings = webView.getSettings();
