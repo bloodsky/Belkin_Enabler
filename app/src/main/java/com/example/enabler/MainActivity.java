@@ -2,6 +2,7 @@ package com.example.enabler;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import static com.example.enabler.Constants.JSTurnWifiOff;
 import static com.example.enabler.Constants.JSTurnWifiOn;
 import static com.example.enabler.Constants.JSWifiIsOnOrOff;
 import static com.example.enabler.Constants.LOGIN_PAGE;
+import static com.example.enabler.Constants.WAIT_PAGE;
 import static com.example.enabler.Constants.WIRELESS_PAGE;
 
 
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private Integer onOff = 0;  // Button state: 0 - OFF , 1 - ON
     private WebView webView;
 
+    @SuppressLint("AddJavascriptInterface")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case WIRELESS_PAGE:
                         view.loadUrl(JSWifiIsOnOrOff);
-                        webView.loadUrl(JSCallbackWifiState);
+                        view.loadUrl(JSCallbackWifiState);
 
                         btn.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -67,8 +70,10 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
                         break;
-                    case INDEX_PAGE:
-                        webView.loadUrl(WIRELESS_PAGE);
+                    case WAIT_PAGE:
+                        break;
+                    default:
+                        view.loadUrl(WIRELESS_PAGE);
                         break;
                 }
             }
@@ -90,12 +95,15 @@ public class MainActivity extends AppCompatActivity {
         btn.setVisibility(View.VISIBLE);
         if (value.equals("on")) {
             onOff = 1; // wifi is on
+            Log.d("DEBUG", String.valueOf(onOff));
             btn.setBackground(getDrawable(R.drawable.onwifi));
         } else {
             onOff = 0; // wifi is off
-            btn.setBackground(getDrawable(R.drawable.off_wifi_1_569954));
+            Log.d("DEBUG", String.valueOf(onOff));
+            btn.setBackground(getDrawable(R.drawable.offwifi));
         }
     }
+    @SuppressLint("SetJavaScriptEnabled")
     private void givePermissionToWebView(WebView webView) {
         WebSettings webSettings = webView.getSettings();
         // TODO --> Security error?
