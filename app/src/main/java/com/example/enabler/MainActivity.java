@@ -27,6 +27,13 @@ public class MainActivity extends AppCompatActivity {
 
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
+        webSettings.setDomStorageEnabled(true);
+        webSettings.setAllowFileAccess(true);
+        webSettings.setAllowContentAccess(true);
+        webSettings.setDatabaseEnabled(true);
+        webSettings.setMinimumFontSize(1);
+        webSettings.setMinimumLogicalFontSize(1);
+
 
         webView.loadUrl("http://10.0.2.2:8080/login.html");
         //webView.loadUrl("http://192.168.1.2/wireless_id.stm");
@@ -43,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 super.onPageFinished(view, url);
                 webView.loadUrl(
                         "javascript:(function() { " +
-                                "document.tF.submit();"+
+                                "return checkfwVersion()"+
                                 "})()");
             }
 
@@ -55,15 +62,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),error.getDescription().toString(),Toast.LENGTH_LONG).show();
             }
         });
-
-        /*btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //WebView webView = findViewById(R.id.webview);
-                webView.ja("javascript:checkfwVersion();");
-                //webView.reload();
-            }
-        });*/
 
     }
 }
