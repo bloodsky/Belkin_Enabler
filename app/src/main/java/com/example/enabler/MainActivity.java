@@ -37,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
         //webView.loadUrl("http://10.0.2.2:8080/login.html");
         webView.loadUrl("http://192.168.1.2/login.stm");
-        webView.loadUrl("http://192.168.1.2/wireless_id.stm");
+
+
 
         // TODO
         /*
@@ -49,17 +50,24 @@ public class MainActivity extends AppCompatActivity {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 Log.d("URL", url);
-                if(url.equals("http://192.168.1.2/login.stm")) {
-                    webView.loadUrl(
-                            "javascript:(function() { " +
-                                    "return checkfwVersion()" +
-                                    "})()");
-                } else if(url.equals("http://192.168.1.2/wireless_id.stm")){
-                    webView.loadUrl(
-                            "javascript:(function() { " +
-                                    "myobj = document.getElementsByName(\"wbr\");" +
-                                    "myobj[0].selectedIndex = 2" +
-                                    "})()");
+                switch (url) {
+                    case "http://192.168.1.2/login.stm":
+                        view.loadUrl(
+                                "javascript:(function() { " +
+                                        "return checkfwVersion()" +
+                                        "})()");
+
+                        break;
+                    case "http://192.168.1.2/wireless_id.stm":
+                        view.loadUrl(
+                                "javascript:(function() { " +
+                                        "myobj = document.getElementsByName(\"wbr\");" +
+                                        "myobj[0].selectedIndex = 2" +
+                                        "})()");
+                        break;
+                    case "http://192.168.1.2/index.htm":
+                        webView.loadUrl("http://192.168.1.2/wireless_id.stm");
+                        break;
                 }
             }
 
