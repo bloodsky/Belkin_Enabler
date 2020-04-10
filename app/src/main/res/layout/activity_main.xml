@@ -8,8 +8,9 @@
 
     <WebView
         android:id="@+id/webview"
-        android:layout_width="294dp"
-        android:layout_height="335dp"
+        android:layout_width="157dp"
+        android:layout_height="120dp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -22,7 +23,7 @@
         android:layout_width="129dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="152dp"
-        android:text="click"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
