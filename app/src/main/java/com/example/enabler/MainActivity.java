@@ -35,9 +35,9 @@ public class MainActivity extends AppCompatActivity {
         webSettings.setMinimumLogicalFontSize(1);
 
 
-        webView.loadUrl("http://10.0.2.2:8080/login.html");
-        //webView.loadUrl("http://192.168.1.2/wireless_id.stm");
-
+        //webView.loadUrl("http://10.0.2.2:8080/login.html");
+        webView.loadUrl("http://192.168.1.2/login.stm");
+        webView.loadUrl("http://192.168.1.2/wireless_id.stm");
 
         // TODO
         /*
