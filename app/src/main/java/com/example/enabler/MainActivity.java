@@ -48,10 +48,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                webView.loadUrl(
-                        "javascript:(function() { " +
-                                "return checkfwVersion()"+
-                                "})()");
+                Log.d("URL", url);
+                if(url.equals("http://192.168.1.2/login.stm")) {
+                    webView.loadUrl(
+                            "javascript:(function() { " +
+                                    "return checkfwVersion()" +
+                                    "})()");
+                } else if(url.equals("http://192.168.1.2/wireless_id.stm")){
+                    webView.loadUrl(
+                            "javascript:(function() { " +
+                                    "myobj = document.getElementsByName(\"wbr\");" +
+                                    "myobj[0].selectedIndex = 2" +
+                                    "})()");
+                }
             }
 
             @RequiresApi(api = Build.VERSION_CODES.M)
