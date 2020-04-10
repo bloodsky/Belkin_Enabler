@@ -62,7 +62,9 @@ public class MainActivity extends AppCompatActivity {
                         view.loadUrl(
                                 "javascript:(function() { " +
                                         "myobj = document.getElementsByName(\"wbr\");" +
-                                        "myobj[0].selectedIndex = 2" +
+                                        "myobj[0].selectedIndex = 2;" +
+                                        "document.forms[0].submit();" +
+                                        "return evaltF();" +
                                         "})()");
                         break;
                     case "http://192.168.1.2/index.htm":
