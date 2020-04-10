@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btn;         // Needed to reference xml obj.
     private Integer onOff = 0;  // Button state: 0 - OFF , 1 - ON
     private WebView webView;
+    private ProgressBar pBar;
 
     @SuppressLint("AddJavascriptInterface")
     @Override
@@ -42,8 +43,11 @@ public class MainActivity extends AppCompatActivity {
 
         webView = findViewById(R.id.webview);
         btn = findViewById(R.id.button);
-
+        pBar = findViewById(R.id.progressBar);
+    
+        pBar.setVisibility(View.INVISIBLE);
         givePermissionToWebView(webView);
+        
         webView.addJavascriptInterface(this, "android");
         webView.loadUrl(LOGIN_PAGE);
         webView.setWebViewClient(new WebViewClient(){
@@ -62,11 +66,22 @@ public class MainActivity extends AppCompatActivity {
                         btn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                if (onOff == 1) { // wifi is on I'll turn it down
+                                pBar.setVisibility(View.VISIBLE);
+                                if (onOff == 1) { // wifi is on, turn it down
                                     view.loadUrl(JSTurnWifiOff);
                                 } else {
                                     view.loadUrl(JSTurnWifiOn);
                                 }
+                                btn.setEnabled(false);
+                                
+                                Handler handler = new Handler();
+                                handler.postDelayed(new Runnable() {
+                                    public void run() {
+                                     // After 25 seconds
+                                        pBar.setVisibility(View.INVISIBLE);
+                                        btn.setEnabled(true);
+                                    }
+                                }, 25000);
                             }
                         });
                         break;
